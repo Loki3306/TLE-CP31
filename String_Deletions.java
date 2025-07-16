@@ -7,25 +7,35 @@ public class String_Deletions {
         while (T-- > 0) {
             int N = sc.nextInt();
             String S = sc.next();
-            processString(S);
+            System.out.println(processString(S)); // <-- FIXED THIS LINE
         }
     }
 
     public static int processString(String s) {
         StringBuilder sb = new StringBuilder(s);
-        int i = 0;
-        while (i <= sb.length() - 3) {
-            char a = sb.charAt(i);
-            char b = sb.charAt(i + 1);
-            char c = sb.charAt(i + 2);
-            if (a != b && b != c) {
-                sb.deleteCharAt(i + 1);
-                i = 0; // reset to beginning after deletion to handle overlaps
-            } else {
-                i++;
+        while (true) {
+            boolean deleted = false;
+
+            for (int i = 0; i < sb.length() - 2; i++) {
+                for (int j = i + 1; j < sb.length() - 1; j++) {
+                    for (int k = j + 1; k < sb.length(); k++) {
+                        if (sb.charAt(i) != sb.charAt(j) && sb.charAt(j) != sb.charAt(k)) {
+                            sb.deleteCharAt(j);
+                            deleted = true;
+                            break;
+                        }
+                    }
+                    if (deleted)
+                        break;
+                }
+                if (deleted)
+                    break;
             }
+
+            if (!deleted)
+                break;
         }
+
         return sb.length();
     }
-
 }
