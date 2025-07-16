@@ -15,10 +15,8 @@ public class  A_Cover_in_Water{
 
     public static int minActionsRequired(int n, String s) {
         int ans=0;
-        boolean three_cell=false;
         for(int i=0;i<n;i++){
             if(s.charAt(i) =='.' && i+1<n && s.charAt(i+1) =='.' && i+2<n && s.charAt(i+2) =='.'){
-                three_cell=true;
                 return 2;
             }
 
