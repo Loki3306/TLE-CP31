@@ -46,16 +46,6 @@ public class A_Doremy_s_Paint_3 {
         if (map.get(nums[0]) - map.get(nums[n - 1]) == 0)
             return true;
 
-        // if(n%2==0){
-        // if(nums[n/2] == nums[0] && nums[n/2 +1]==nums[n-1]) return true;
-        // return false;
-        // }
-
-        // else{
-        // if((nums[0] == nums[n/2 +1] && nums[n/2 +2] ==nums[n-1]) || (nums[0] ==
-        // nums[n/2] && nums[n/2+1] ==nums[n-1]))
-        // return true;
-
         return false;
     }
 }

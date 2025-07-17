@@ -1,53 +1,85 @@
+
+// import java.util.*;
+
+// public class  A_Line_Trip{
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+        
+//         int t = sc.nextInt();  // number of test cases
+        
+//         while (t-- > 0) {
+//             int n = sc.nextInt();  // number of gas stations
+//             int x = sc.nextInt();  // destination point
+            
+//             int[] stations = new int[n];
+//             for (int i = 0; i < n; i++) {
+//                 stations[i] = sc.nextInt();  // station locations
+//             }
+
+//             int result = minimumTankCapacity(n, x, stations);
+//             System.out.println(result);
+//         }
+//     }
+
+//     public static int minimumTankCapacity(int n, int x, int[] nums) {
+//         if(n==1){
+//             if(nums[0] >= (2*(x-nums[0]))) return nums[0];
+//             else return (2*(x-nums[0]));
+//         }
+
+
+
+
+
+//         int maxD=Integer.MIN_VALUE;
+//         for(int i=0;i<nums.length-1;i++){
+//             int d=nums[i+1]-nums[i];
+//             maxD=Math.max(maxD,d);
+//         }
+
+//         int d=(x-nums[n-1])*2;
+//         maxD=Math.max(maxD,d);
+
+//         return maxD;
+//     }
+// }
+
 import java.util.*;
 
 public class A_Line_Trip {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
+        
+        int t = sc.nextInt();  // number of test cases
+        
         while (t-- > 0) {
-            int n = sc.nextInt();
-            int x = sc.nextInt();
-            int[] a = new int[n];
+            int n = sc.nextInt();  // number of gas stations
+            int x = sc.nextInt();  // destination point
+            
+            int[] stations = new int[n];
             for (int i = 0; i < n; i++) {
-                a[i] = sc.nextInt();
+                stations[i] = sc.nextInt();  // station locations
             }
 
-            // Build full path
-            ArrayList<Integer> path = new ArrayList<>();
-            path.add(0);
-            Arrays.sort(a);
-            for (int i = 0; i < n; i++)
-                path.add(a[i]);
-            path.add(x);
-            for (int i = n - 1; i >= 0; i--)
-                path.add(a[i]);
-            path.add(0);
-
-            // Set of refueling points
-            HashSet<Integer> canRefuel = new HashSet<>();
-            canRefuel.add(0);
-            for (int val : a)
-                canRefuel.add(val);
-
-            int maxGap = 0;
-            int lastRefuel = 0;
-
-            for (int i = 1; i < path.size(); i++) {
-                int current = path.get(i);
-                int dist = Math.abs(current - path.get(i - 1));
-                lastRefuel += dist;
-
-                if (canRefuel.contains(current)) {
-                    maxGap = Math.max(maxGap, lastRefuel);
-                    lastRefuel = 0;
-                }
-            }
-
-            // Edge case: if we never hit a refuel point at the end
-            maxGap = Math.max(maxGap, lastRefuel);
-
-            System.out.println(maxGap);
-            sc.close();
+            int result = minimumTankCapacity(n, x, stations);
+            System.out.println(result);
         }
+    }
+
+    public static int minimumTankCapacity(int n, int x, int[] nums) {
+        int maxGap = 0;
+
+        // Gap from 0 to first station
+        maxGap = Math.max(maxGap, nums[0] - 0);
+
+        // Gaps between stations
+        for (int i = 0; i < n - 1; i++) {
+            maxGap = Math.max(maxGap, nums[i + 1] - nums[i]);
+        }
+
+        // Last segment: from last station to x and back
+        maxGap = Math.max(maxGap, (x - nums[n - 1]) * 2);
+
+        return maxGap;
     }
 }
