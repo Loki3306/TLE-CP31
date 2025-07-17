@@ -11,6 +11,8 @@ public class  A_Cover_in_Water{
             
             System.out.println(minActionsRequired(n, s));
         }
+
+        sc.close();
     }
 
     public static int minActionsRequired(int n, String s) {
