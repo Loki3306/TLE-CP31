@@ -26,9 +26,9 @@ public class A_Desorting {
                 return;
             }
 
-            minDiff= Math.min(minDiff,a[i-1]-a[i]);
+            minDiff= Math.min(minDiff,a[i]-a[i-1]);
         }
 
-        System.out.println(minDiff);
+        System.out.println((minDiff)/2 +1);
     }
 }
